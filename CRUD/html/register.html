@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/script.js"></script>
   </head>
 
   <body>
@@ -30,7 +31,7 @@
 
             <!-- Coluna do formulário -->
             <div class="col-md-6">
-              <form>
+              <form id="myform">
                 <!-- Nome -->
                 <div class="mb-3">
                   <label for="nome" class="form-label">Nome</label>
@@ -65,6 +66,8 @@
                     name="senha"
                     placeholder="Crie uma senha"
                   />
+                  <div id="feedbacksenha"></div>
+                  <!-- Div para feedback da senha -->
                 </div>
 
                 <!-- Botão de envio -->
