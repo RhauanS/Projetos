@@ -21,3 +21,17 @@ legend {
     justify-content: center;
     align-items: center;
 }
+
+#links_modificar {
+    text-decoration: none;
+    /* Remove o sublinhado */
+    color: #007bff;
+    /* Adiciona uma cor ao link */
+}
+
+#links_modificar:hover {
+    color: #0056b3;
+    /* Muda a cor ao passar o mouse */
+    text-decoration: none;
+    /* Sublinha o link ao passar o mouse */
+}

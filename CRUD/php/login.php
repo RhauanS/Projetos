@@ -3,60 +3,40 @@ session_start();
 include 'dbconnection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Validação dos dados do formulário
-    $nome = htmlspecialchars($_POST['nome']);
     $email = htmlspecialchars($_POST['email']);
     $senha = htmlspecialchars($_POST['senha']);
 
-    // Verificação do formato do e-mail
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Por favor, insira um e-mail válido.')</script>";
-        exit;
-    }
-
-    // Verificação de senha (mínimo de 6 caracteres)
-    if (strlen($senha) < 6) {
-        echo "<script>alert('A senha deve ter pelo menos 6 caracteres.')</script>";
-        exit;
-    }
-
-    // Criação do hash para a senha
-    $hash = password_hash($senha, PASSWORD_DEFAULT);
-
-    // Verificação se o e-mail já existe no banco de dados
-    if ($stmt = $conn->prepare("SELECT * FROM perfil WHERE Email = ?")) {
+    // Consultar o banco de dados
+    $sql = 'SELECT * FROM perfil WHERE Email = ?';
+    if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            echo "<script>alert('Usuário já cadastrado com esse Email.')</script>";
-            $stmt->close(); // Fechando a declaração preparada
-            $conn->close(); // Fechando a conexão
-            exit;
-        } else {
-            // Inserção de dados no banco de dados
-            $sql = "INSERT INTO perfil (Nome, Email, Senha) VALUES (?, ?, ?)";
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sss", $nome, $email, $hash);
-                if ($stmt->execute()) {
-                    $mensagem = "Usuario cadastrado com sucesso!";
-                } else {
-                    echo "<script>alert('Erro ao realizar o cadastro.')</script>";
-                }
+            $user = $result->fetch_assoc();
+
+            // Verificar a senha usando password_verify
+            if (password_verify($senha, $user['Senha'])) {
+                // Se a senha estiver correta, cria a sessão
+                $_SESSION['autenticado'] = true;
+                $_SESSION['nome_usuario'] = $user['Nome'];
+                header('location: home.php'); // Corrigido
             } else {
-                echo "<script>alert('Erro durante a execução da consulta SQL.')</script>";
+                $feedback = '<div class="text-warning d-flex justify-content-center align-items-center">Email ou Senha incorreto</div>';
             }
+        } else {
+            $feedback = '<div class="text-warning d-flex justify-content-center align-items-center">Usuario não encontrado</div>';
         }
     } else {
         echo "<script>alert('Erro ao preparar a consulta.')</script>";
     }
-
-    // Fechando as declarações preparadas e a conexão
-    $stmt->close();
-    $conn->close();
 }
+
+$conn->close();
 ?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -64,27 +44,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cadastro</title>
+    <title>Login</title>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/script.js"></script>
+
 </head>
 
 <body>
     <section class="py-5 mt-5">
         <div class="container">
             <fieldset>
-                <legend>Cadastro</legend>
+                <legend>Login</legend>
                 <div class="row justify-content-center align-items-center">
                     <!-- Coluna de boas-vindas -->
                     <div class="col-md-6 mb-4">
                         <h2 class="mb-3 text-primary">Seja Bem-Vindo!</h2>
                         <p class="lead">
-                            Cadastre-se para usar nossas funcionalidades e aproveitar o
+                            Faça o login para usar nossas funcionalidades e aproveitar o
                             melhor da nossa plataforma.
                         </p>
                     </div>
@@ -95,17 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             id="myForm"
                             autocomplete="off"
                             method="post"
-                            action="../php/register.php">
-                            <!-- Nome -->
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="nome"
-                                    name="nome"
-                                    placeholder="Digite seu nome" />
-                            </div>
+                            action="">
+
 
                             <!-- Email -->
                             <div class="mb-3">
@@ -127,22 +98,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     id="senha"
                                     name="senha"
                                     placeholder="Crie uma senha" />
-                                <div id="senhaFeedback"></div>
-                                <!-- Div para feedback da senha -->
-                                <?php if (isset($mensagem)) { ?>
-                                    <p class='d-flex justify-content-center align-items-center text-primary'><?php echo $mensagem; ?></p>
-                                <?php } ?>
-
                             </div>
-
                             <div class="d-flex justify-content-center align-items-center mb-3">
-                                <a id="links_modificar" href="login.php">Faça o login</a>
+                                <a id="links_modificar" href="register.php">Crie uma conta</a>
                             </div>
+                            <?php if (isset($feedback)) {
+                                echo $feedback;
+                            } ?>
 
                             <!-- Botão de envio -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary text-light">
-                                    Cadastrar
+                                <button type="submit" class="btn btn-primary">
+                                    Entrar
                                 </button>
                             </div>
                         </form>
