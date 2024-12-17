@@ -1,0 +1,23 @@
+fieldset {
+    background: linear-gradient(135deg,
+            #3f51b5,
+            #6a1b9a);
+    /* Gradiente azul roxo */
+    border-radius: 8px;
+    padding: 30px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
