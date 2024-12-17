@@ -1,0 +1,54 @@
+/* Layouts */
+
+#container-full {
+	width: 840px;
+	height: 500px;
+}
+
+body{
+	background: #000000 url('fundo.jpg');
+	color: white;
+	
+	
+}
+
+h1{
+	text-transform: uppercase;
+	text-align: center;
+	
+
+}
+
+#container-left{
+	
+	width: 650px;
+	text-align: center;
+	float: left;
+	margin-top: 150px;
+	
+}
+
+#container-right{
+	
+	width: 650px;
+	float: right;
+}
+
+h3{
+	color: red;
+}
+
+h4{
+	color: cyan;
+	font-size: 20px;
+}
+
+input{
+	width: 500px;
+	border-radius: 5px;
+	height: 30px;
+}
+
+#button{
+	color: red;
+}
