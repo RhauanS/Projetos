@@ -1,36 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const myform = document.getElementById('myform');
-  
-  myform.addEventListener('submit', function (event) {
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("myForm")
+    .addEventListener("submit", function (event) {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
 
-    // Verifica se os campos estão vazios
-    if (nome === '' || email === '' || senha === '') {
-      event.preventDefault();
-      alert('Campos inválidos, por favor insira seus dados');
-      return;
-    }
+      // Validação do email
+      // Validação do e-mail
+      if (!validateEmail(email)) {
+        alert("Por favor, insira um e-mail válido.");
+        event.preventDefault(); // Impede o envio do formulário
+        // Aqui você pode adicionar feedback visual também, caso deseje
+        document.getElementById("email").style.borderColor = "red";
+      }
 
-    // Verifica se a senha tem mais de 6 caracteres
+      // Validação da senha
+      if (senha.length < 6) {
+        alert("A senha deve ter pelo menos 6 caracteres.");
+        event.preventDefault(); // Impede o envio do formulário
+      }
+
+      // Desabilitar o botão de enviar e mostrar mensagem ao enviar
+      const submitButton = this.querySelector('input[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.value = "Enviando...";
+    });
+
+  // Função para validar o email
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  // Feedback em tempo real da senha
+  document.getElementById("senha").addEventListener("input", function () {
+    const senha = this.value;
+    const feedback = document.getElementById("senhaFeedback");
+
     if (senha.length < 6) {
-      event.preventDefault();
-      alert('A senha deve conter mais de 6 caracteres');
-      return;
-    }
-
-    // Feedback sobre a força da senha
-    const feedbacksenha = document.getElementById('feedbacksenha');
-    if (senha.length >= 6 && senha.length <= 8) {
-      feedbacksenha.style.color = 'orange'; // Cor para senha média
-      feedbacksenha.textContent = 'Senha média';
-    } else if (senha.length > 8) {
-      feedbacksenha.style.color = 'green'; // Cor para senha forte
-      feedbacksenha.textContent = 'Senha forte';
+      feedback.textContent = "Senha fraca. Deve ter pelo menos 6 caracteres.";
+      feedback.style.color = "red";
     } else {
-      feedbacksenha.style.color = 'red'; // Cor para senha fraca
-      feedbacksenha.textContent = 'Senha fraca';
+      feedback.textContent = "Senha forte.";
+      feedback.style.color = "green";
     }
   });
 });
