@@ -66,9 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                 <p id="senha_resultado"></p>
             </div>
             <div class="d-flex justify-content-center mb-3">
-                <a href="register.php">Crie uma conta</a>
+                <a href="login.php">Já possui uma conta?</a>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            <button type="submit" class="btn btn-primary w-100">Registrar</button>
             <div>
                 <?php if (isset($mensagem)) { ?>
                     <?php echo $mensagem; ?>
