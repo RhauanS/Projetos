@@ -3,7 +3,7 @@ require_once 'db_connection.php';
 session_start();
 $mensagem = '';
 
-if($_SERVER["REQUEST_METHOD"] == 'POST'){
+if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $nome = htmlspecialchars($_POST['nome']);
     $numero = htmlspecialchars($_POST['numero']);
     $senha = htmlspecialchars($_POST['senha']);
@@ -15,8 +15,8 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     $stmt->bind_param('si', $nome, $numero);
     $stmt->execute();
     $result = $stmt->get_result();
-    
-    if($result->num_rows > 0){
+
+    if ($result->num_rows > 0) {
         $mensagem = '<div class = "text-danger">USUÁRIO JÁ CADASTRADO</div>';
         $stmt->close();
     } else {
@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <form class="bg-white p-5 rounded shadow" style="min-width: 300px;" action="register.php" method="post">
-        <div class="d-flex justify-content-center display-6 mb-3">Cadastre-se</div>
+            <div class="d-flex justify-content-center display-6 mb-3">Cadastre-se</div>
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
@@ -65,11 +65,14 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                 <input type="password" class="form-control" id="senha" name="senha" required>
                 <p id="senha_resultado"></p>
             </div>
+            <div class="d-flex justify-content-center mb-3">
+                <a href="register.php">Crie uma conta</a>
+            </div>
             <button type="submit" class="btn btn-primary w-100">Enviar</button>
             <div>
-                <?php if(isset($mensagem)){?>
+                <?php if (isset($mensagem)) { ?>
                     <?php echo $mensagem; ?>
-                <?php } ?>    
+                <?php } ?>
             </div>
         </form>
     </div>

@@ -14,7 +14,7 @@ if (!isset($_SESSION['usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-
+    <script src="../javascript_files/script_questoes.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome (ícones) -->
@@ -55,12 +55,28 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- CONTEÚDO -->
     <div class="container-fluid mt-4">
-        <div class="row">
-            <div class="col-md-12" style="border: 1px solid black; height: 100px;">
-                Conteúdo centralizado com largura cheia.
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <fieldset class="border p-4 rounded shadow-sm bg-white ">
+                    <legend class="w-auto px-2 font-weight-bold ">Questões</legend>
+                    <label class="h5 mb-3">Em qual ano o Brasil foi descoberto?</label>
+
+                    <select id="seletor" class="form-control mb-3">
+                        <option disabled selected>Escolha a alternativa</option>
+                        <option>1500</option>
+                        <option>2500</option>
+                        <option>568</option>
+                        <option>2009</option>
+                    </select>
+
+                    <p id="resultado" class="font-weight-bold"></p>
+
+                </fieldset>
             </div>
         </div>
     </div>
+
+
 
     <!-- Scripts JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

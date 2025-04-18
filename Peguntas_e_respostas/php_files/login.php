@@ -62,6 +62,9 @@ $conn->close();
                 <label for="senha" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="senha" name="senha" required>
             </div>
+            <div class="d-flex justify-content-center mb-3">
+                <a href="register.php">Crie uma conta</a>
+            </div>
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
             <div>
                 <?php if (isset($mensagem)) { ?>
