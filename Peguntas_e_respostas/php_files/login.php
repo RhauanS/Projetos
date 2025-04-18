@@ -6,7 +6,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = htmlspecialchars($_POST['nome']);
     $numero = htmlspecialchars($_POST['numero']);
-    $senha = $_POST['senha']; // não precisa de htmlspecialchars, pois não será exibida diretamente
+    $senha = $_POST['senha'];
 
     $sql = "SELECT nome, numero, senha FROM `usuarios` WHERE nome = ? AND numero = ?";
     if ($stmt = $conn->prepare($sql)) {
@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $result->fetch_assoc();
             
             if (password_verify($senha, $user['senha'])) {
-                $_SESSION['usuario'] = $user['nome'];
+                $_SESSION['usuario'] = $user['nome']; // Armazena o nome do usuário na sessão
                 $_SESSION['numero'] = $user['numero'];
-                header("Location: home.php"); // redireciona para a página principal
+                header("Location: home.php"); // Redireciona para a página home.php
                 exit();
             } else {
                 $mensagem = '<p class="text-danger">Senha incorreta</p>';
@@ -39,15 +39,12 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projeto Bootstrap Completo</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../javascript_files/script.js"></script>
 </head>
-
 <body class="bg-light">
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
@@ -64,9 +61,8 @@ $conn->close();
             <div class="mb-3">
                 <label for="senha" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="senha" name="senha" required>
-                <p id="senha_resultado"></p>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
             <div>
                 <?php if (isset($mensagem)) { ?>
                     <?php echo $mensagem; ?>
@@ -77,5 +73,4 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

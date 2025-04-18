@@ -7,3 +7,6 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['numero'])) {
     header('Location: login.php');
     exit();
 }
+
+
+?>
