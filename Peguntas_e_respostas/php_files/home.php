@@ -42,7 +42,7 @@ if (!isset($_SESSION['usuario'])) {
                     <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
                 </ul>
 
-                <!-- Botão "Sair" alinhado à direita -->
+                <!-- Botão "Sair" -->
                 <form action="logout.php" method="post" class="form-inline ml-md-auto mt-2 mt-md-0">
                     <button type="submit" class="btn btn-info btn-sm rounded-pill px-4">
                         <i class="fas fa-sign-out-alt"></i> Sair
@@ -61,7 +61,7 @@ if (!isset($_SESSION['usuario'])) {
                     <legend class="w-auto px-2 font-weight-bold ">Questões</legend>
                     <label class="h5 mb-3">Em qual ano o Brasil foi descoberto?</label>
 
-                    <select id="seletor" class="form-control mb-3">
+                    <select id="seletor1" class="form-control mb-3">
                         <option disabled selected>Escolha a alternativa</option>
                         <option>1500</option>
                         <option>2500</option>
@@ -69,7 +69,31 @@ if (!isset($_SESSION['usuario'])) {
                         <option>2009</option>
                     </select>
 
-                    <p id="resultado" class="font-weight-bold"></p>
+                    <p id="resultado1" class="font-weight-bold"></p>
+
+                </fieldset>
+
+                <fieldset class="border p-4 rounded shadow-sm bg-white ">
+                    <legend class="w-auto px-2 font-weight-bold ">Questões</legend>
+                    <label class="h5 mb-3">Qual das opções representa corretamente a saída do seguinte código em Python?
+                        x = 5
+                        y = 3
+
+                        if x > y:
+                        print("A")
+                        else:
+                        print("B")
+                    </label>
+
+                    <select id="seletor2" class="form-control mb-3">
+                        <option disabled selected>Escolha a alternativa</option>
+                        <option>B</option>
+                        <option>A</option>
+                        <option>Erro de sintaxe</option>
+                        <option>Nada sera impresso</option>
+                    </select>
+
+                    <p id="resultado2" class="font-weight-bold"></p>
 
                 </fieldset>
             </div>
