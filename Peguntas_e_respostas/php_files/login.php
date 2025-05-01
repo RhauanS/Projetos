@@ -18,9 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $result->fetch_assoc();
             
             if (password_verify($senha, $user['senha'])) {
-                $_SESSION['usuario'] = $user['nome']; // Armazena o nome do usuário na sessão
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['usuario'] = $user['nome'];
                 $_SESSION['numero'] = $user['numero'];
-                header("Location: home.php"); // Redireciona para a página home.php
+                header("Location: home.php"); 
                 exit();
             } else {
                 $mensagem = '<p class="text-danger">Senha incorreta</p>';
