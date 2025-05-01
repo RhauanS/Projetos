@@ -96,6 +96,27 @@ if (!isset($_SESSION['usuario'])) {
                     <p id="resultado2" class="font-weight-bold"></p>
 
                 </fieldset>
+
+
+                <fieldset class="border p-4 rounded shadow-sm bg-white ">
+                    <legend class="w-auto px-2 font-weight-bold ">Questões</legend>
+                    <label class="h5 mb-3">Qual será a saída do seguinte código em Python?
+                        for i in range(1, 6):
+                        if i % 2 == 0:
+                        print(i)
+                    </label>
+
+                    <select id="seletor3" class="form-control mb-3">
+                        <option disabled selected>Escolha a alternativa</option>
+                        <option>1 2 3 4 5</option>
+                        <option>2 4</option>
+                        <option>1 3 5</option>
+                        <option>0 2 4</option>
+                    </select>
+
+                    <p id="resultado3" class="font-weight-bold"></p>
+
+                </fieldset>
             </div>
         </div>
     </div>
