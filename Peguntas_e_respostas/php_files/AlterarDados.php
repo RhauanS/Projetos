@@ -70,11 +70,19 @@ $_SESSION['numero'];
                 <tbody>
                     <tr>
 
-                        <td><?php echo htmlspecialchars($_SESSION['usuario'])?></td>
+                        <td><?php echo htmlspecialchars($_SESSION['usuario']) ?></td>
                         <td><?php echo htmlspecialchars($_SESSION['numero']) ?></td>
                         <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
+                            <form action="editar.php" method="post">                                
+                                <input type="hidden" name="nome" value="<?php echo $_SESSION['usuario']; ?>">
+                                <input type="hidden" name="numero" value="<?php echo $_SESSION['numero']; ?>">
+                                <button class="btn btn-warning btn-sm">Editar</button>
+                            </form>
+                            <form action="excluir.php" method="post">                                
+                                <input type="hidden" name="nome" value="<?php echo $_SESSION['usuario']; ?>">
+                                <input type="hidden" name="numero" value="<?php echo $_SESSION['numero']; ?>">
+                                <button class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
