@@ -3,15 +3,17 @@ document.addEventListener('DOMContentLoaded', function(){
     let numero = document.getElementById('numero');
     let senha = document.getElementById('senha');
 
-    // Quando o formulário for enviado
+    
     document.querySelector('form').addEventListener('submit', function(e){
         if(nome.value.trim() === '' || numero.value.trim() === '' || senha.value.trim() === ''){
             e.preventDefault(); // impede o envio do formulário
             alert('Complete todas as informações');
+        }else if(isNaN(numero)){
+            e.preventDefault();
         }
     });
 
-    // Verifica força da senha em tempo real
+    
     senha.addEventListener('input', function(){
         let result = document.getElementById('senha_resultado');
         let valorSenha = senha.value;

@@ -53,7 +53,7 @@ $conn->close();
             <div class="alert alert-info"><?php echo $mensagem; ?></div>
         <?php endif; ?>
 
-        <form action="editar.php" method="post">
+        <form action="editar.php" method="post" class="p-5 rounded shadow">
             <div class="form-group">
                 <label for="novo_nome">Novo Nome</label>
                 <input type="text" class="form-control" id="novo_nome" name="novo_nome" value="<?php echo htmlspecialchars($_SESSION['usuario']); ?>" required>
