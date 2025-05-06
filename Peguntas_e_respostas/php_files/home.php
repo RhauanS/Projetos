@@ -19,7 +19,7 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             let pontuacao = 0;
 
             function verificarResposta(seletorId, respostaCerta, resultadoId) {
@@ -41,7 +41,7 @@ if (!isset($_SESSION['usuario'])) {
                 });
             }
 
-            
+
             verificarResposta('seletor1', '1500', 'resultado1');
             verificarResposta('seletor2', 'C', 'resultado2');
             verificarResposta('seletor3', '2 4', 'resultado3');
@@ -61,7 +61,7 @@ if (!isset($_SESSION['usuario'])) {
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="position: relative;">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="#">
@@ -79,7 +79,7 @@ if (!isset($_SESSION['usuario'])) {
                     <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
                 </ul>
 
-                
+
                 <form action="logout.php" method="post" class="form-inline ml-md-auto mt-2 mt-md-0">
                     <button type="submit" class="btn btn-info btn-sm rounded-pill px-4">
                         <i class="fas fa-sign-out-alt"></i> Sair
@@ -94,10 +94,13 @@ if (!isset($_SESSION['usuario'])) {
     <div class="container-fluid mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div style="width: 100px; height: 100px;" id="pontuacao">Pontuação: 0</div>
+                <div style="width: 100px; height: 100px; position: fixed; top: 55px; left: 10px; background-color: lightgray;" id="pontuacao">
+                    Pontuação: 0
+                </div>
+
                 <fieldset class="border p-4 rounded shadow-sm bg-white ">
                     <legend class="w-auto px-2 font-weight-bold ">Questões</legend>
-                    
+
                     <!-- Questão 1 -->
                     <label class="h5 mb-3">Em qual ano o Brasil foi descoberto?</label>
                     <select id="seletor1" class="form-control mb-3">
