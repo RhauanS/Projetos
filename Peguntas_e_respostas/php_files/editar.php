@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ssis', $novo_nome, $novo_numero, $nome, $numero);
         if ($stmt->execute()) {        
-            // Atualiza os dados na sessão
             $_SESSION['usuario'] = $novo_nome;
             $_SESSION['numero'] = $novo_numero;
             $mensagem = 'Cadastro atualizado com sucesso!';

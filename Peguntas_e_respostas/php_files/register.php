@@ -6,7 +6,7 @@ $mensagem = '';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $numeros = [];
     while (count($numeros) < 4) {
-        $numeros[] = rand(1, 9);
+        $numeros[] = rand(0, 9);
     }
     $numero = (int)implode('', $numeros);
 
